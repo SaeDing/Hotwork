@@ -19,6 +19,8 @@ function createCalendar(year) {
     const months = ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"];
     const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
 
+    let colorWeekCounter = 0;
+
     for (let month = 0; month < 12; month++) {
         const monthElement = document.createElement("div");
         monthElement.className = "month";
@@ -40,6 +42,7 @@ function createCalendar(year) {
             const emptyDayElement = document.createElement("div");
             emptyDayElement.className = "day";
             calendarElement.appendChild(emptyDayElement);
+            colorWeekCounter++;
         }
 
         const totalDays = calendar.getMonthDays(month);
@@ -48,13 +51,14 @@ function createCalendar(year) {
             dayElement.className = "day";
             dayElement.textContent = day;
 
-            if (Math.floor(((day - 1) + shift) / 7) % 2 === 0) {
+            if (Math.floor(colorWeekCounter / 7) % 2 === 0) {
                 dayElement.classList.add("red");
             } else {
                 dayElement.classList.add("blue");
             }
 
             calendarElement.appendChild(dayElement);
+            colorWeekCounter++;
         }
     }
 }
